@@ -2,9 +2,12 @@ import logging
 from datetime import datetime
 import os
 
-LOG_DIRS='Housing_log'
-CURRENT_TIME_STAMP=f"{datetime.now().strftime('%Y-%m-%D:%H-%M-%S')}"
-os.makedirs(LOG_DIRS,exist_ok=True)
-log_file_name=f"log-{CURRENT_TIME_STAMP}.log"
-log_file_path=os.path.join(LOG_DIRS,log_file_name)
-logging.basicConfig(level=logging.INFO,filename=log_file_path,filemode='w',format='[%(asctime)s]%(name)s%(levelname)s-%(message)s')
+LOG_DIRS = "Student_log"
+LOG_FILE = f"{datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.log"
+logs_path = os.path.join(os.getcwd(), "logs", LOG_DIRS)
+try:
+    os.makedirs(logs_path, exist_ok=True)
+except OSError as e:
+    print(f"Error creating directory {logs_path}: {e}")
+LOG_FILE_PATH = os.path.join(logs_path, LOG_FILE)
+logging.basicConfig(level=logging.INFO, filename=LOG_FILE_PATH, filemode='w', format='[%(asctime)s] %(name)s %(levelname)s %(message)s')
